@@ -1,8 +1,18 @@
 # Bash
 alias ssb="source ~/.bash_profile"
 
-# FZF
+# Quick (Usually Dot-Prefixed) Config File Generation
+mkconfigfile() {
+  PAYLOAD=$1
+  FILE_NAME=$2
+  echo -e "$PAYLOAD" > "$FILE_NAME"
+}
 
+mkdotignore() {
+  mkconfigfile "node_modules\npackage-lock.json" ".ignore"
+}
+
+# FZF
 export FZF_DEFAULT_COMMAND='fd --type f'
 
 open() {
