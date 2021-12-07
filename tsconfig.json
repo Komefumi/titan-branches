@@ -4,6 +4,7 @@
     "paths": {
       "@src/*": ["src/*"],
       "@assets/*": ["src/assets/*"],
+      "@templates/*": ["src/templates/*"],
       "@js/*": ["src/scripts/*"],
       "@utils/*": ["src/scripts/utils/*"],
       "@entry/*": ["src/scripts/entry/*"],
@@ -13,7 +14,9 @@
       "@pages/*": ["src/scripts/pages/*"],
       "@layouts/*": ["src/scripts/layouts/*"],
       "@my-types/*": ["src/scripts/types/*"],
-      "@styling/*": ["src/styling/*"]
+      "@styling/*": ["src/styling/*"],
+      "@config/*": ["src/config/*"],
+      "@api/*": ["src/api/*"]
     },
 
     "target": "es5",                                  /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */

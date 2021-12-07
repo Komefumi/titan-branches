@@ -1,13 +1,19 @@
 const path = require("path");
 
-const srcDir = path.join(__dirname, "..", "src");
+const rootDir = path.join(__dirname, "..");
+const srcDir = path.join(rootDir, "src");
 const assetsDir = path.join(srcDir, "assets");
+const templatesDir = path.join(srcDir, "templates");
 const scriptsDir = path.join(srcDir, "scripts");
+const configDir = path.join(srcDir, "config");
+const apiDir = path.join(srcDir, "api");
+const generatedWebPagesDir = path.join(rootDir, "generated-webpages");
 
 module.exports = {
   srcDir,
-  scriptsDir,
   assetsDir,
+  templatesDir,
+  scriptsDir,
   utilsDir: path.join(scriptsDir, "utils"),
   entryDir: path.join(scriptsDir, "entry"),
   componentsDir: path.join(scriptsDir, "components"),
@@ -18,4 +24,7 @@ module.exports = {
   appsDir: path.join(scriptsDir, "apps"),
   distDir: path.join(__dirname, "..", "dist"),
   webpageDir: path.join(__dirname, "..", "src", "webpages"),
+  configDir,
+  apiDir,
+  generatedWebPagesDir,
 }
