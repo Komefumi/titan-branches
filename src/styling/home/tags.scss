@@ -1,0 +1,7 @@
+@import "@mental-rebuilders/styles-reset-library/lib/utils.scss";
+
+@for $i from 1 through 6 {
+  h#{$i} {
+    @include turn-into-heading(30 - (5 * ($i - 1)));
+  }
+}

@@ -1,3 +1,8 @@
 {{> layouts/home/header }}
-Content is (still) here by a long shot shot
+<main class="contentual">
+  <h1>Title</h1>
+  {{#each dataLists}}
+    {{> "content-block" dataForContentAsList=this }}
+  {{/each}}
+</main>
 {{> layouts/home/footer }}

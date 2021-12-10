@@ -16,7 +16,8 @@
       "@my-types/*": ["src/scripts/types/*"],
       "@styling/*": ["src/styling/*"],
       "@config/*": ["src/config/*"],
-      "@api/*": ["src/api/*"]
+      "@api/*": ["src/api/*"],
+      "@data/*": ["src/data/*"]
     },
 
     "target": "es5",                                  /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */

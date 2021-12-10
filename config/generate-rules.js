@@ -87,13 +87,13 @@ module.exports = {
       generateRule(
         /\.jsx$/,
         [...presets.slice(0, 2)],
-        [!isProd && presets[0]].filter(Boolean)
+        // [!isProd && presets[0]].filter(Boolean)
       ),
       generateRule(/\.ts$/, [presets[0], presets[2]], []),
       generateRule(
         /\.tsx$/,
         [...presets.slice(0, 3)],
-        [!isProd && plugins[0]].filter(Boolean)
+        // [!isProd && plugins[0]].filter(Boolean)
       ),
     ];
   },

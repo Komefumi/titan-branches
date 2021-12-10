@@ -75,3 +75,4 @@ nadd() {
 ndad() {
   npm install --save-dev $*
 }
+alias dev-template-mode-start="npm run dev-template-mode-start"

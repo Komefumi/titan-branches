@@ -6,11 +6,13 @@ import { BrowserRouter } from "react-router-dom";
 import getHomeHTML from "@templates/home.hbs";
 import { makeFile } from "@api/file";
 import { isDev } from "@config/index";
+import homeDataLists from "@data/home-page-data";
 
 if (isDev) {
   console.log("It is dev");
-  console.log({ homeHTML: getHomeHTML() });
-  makeFile("home.html", getHomeHTML())
+  const homeHTML = getHomeHTML({ dataLists: homeDataLists });
+  console.log({ homeHTML });
+  makeFile("home.html", homeHTML)
     .then((indexFileCreationResponseData) => {
       console.log({ indexFileCreationResponseData });
     })

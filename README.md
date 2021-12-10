@@ -1,8 +1,3 @@
-# scully-blastique
+# Titan Branches
 
-A boilerplate / starter that provides for react, typescript, and does not limit to working solely with that ecosystem.
-You can develop single page and multi-page applications.
-
-However, there's a limit to how much I've managed to automate. You'll find yourself having to hand-wire things now and then.
-
-Feel free to use as you wish
+This used to be a branch of [scully-blastique](https://github.com/Komefumi/scully-blastique) but was eventually deemed better to be a project of it's own

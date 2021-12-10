@@ -1,0 +1,11 @@
+@import "@mental-rebuilders/styles-reset-library/lib/utils.scss";
+@import "@fontsource/princess-sofia";
+@import "@fontsource/shanti";
+
+@mixin sofiafy() {
+  @include fontize("Princess Sofia");
+}
+
+@mixin shantify() {
+  @include fontize("Shanti");
+}

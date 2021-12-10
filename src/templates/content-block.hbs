@@ -1,0 +1,9 @@
+<div class="content-block">
+  {{#each dataForContentAsList}}
+    {{#if (is-zero @index)}}
+      <h2>{{this}}</h2>
+    {{else}}
+      <p>{{this}}</p>
+    {{/if}}
+  {{/each}}
+</div>

@@ -1,5 +1,5 @@
-import { join } from "path";
-import { writeFileSync } from "fs";
+import { join, dirname as getDirname } from "path";
+import { writeFileSync, mkdirSync, existsSync } from "fs";
 import Router from "@koa/router";
 
 const infoRouter = new Router();
@@ -25,6 +25,11 @@ fileRouter.post("/", async (ctx, _next) => {
       "generated-webpages",
       filename
     );
+    const dirname = getDirname(filePath);
+    const doesDirExist = existsSync(dirname);
+    if (!doesDirExist) {
+      mkdirSync(dirname, { recursive: true });
+    }
     writeFileSync(filePath, contents);
     const message = `${filename} created at ${filePath}`;
     ctx.body = { message };

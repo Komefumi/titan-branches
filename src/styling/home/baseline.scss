@@ -1,0 +1,43 @@
+@import "@mental-rebuilders/styles-reset-library/lib/utils.scss";
+@import "./mixins.scss";
+
+body {
+  background-color: #921345;
+  color: #fefefe;
+  @include shantify();
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+.contentual {
+  max-width: 800px;
+  margin: auto;
+  margin-top: 1.5rem;
+  padding: 1rem;
+  text-align: left;
+  h1 {
+    @include bottom-rule-when-margin-isnt-enough(1.5rem, 100%, 3px, #aaa);
+  }
+
+  h2 {
+    text-align: left;
+    display: inline-block;
+    // @include default-bottom-rule();
+    @include bottom-rule-when-margin-isnt-enough(1.5rem, 100%, 3px, #999)
+      /*
+    position: relative;
+
+    &::after {
+      position: absolute;
+    }
+    */;
+  }
+
+  p + p {
+    margin-top: 1.35rem;
+  }
+}
+
+.content-block {
+  margin-bottom: 2rem;
+}

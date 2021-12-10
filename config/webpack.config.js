@@ -2,16 +2,16 @@ const path = require("path");
 const fs = require("fs");
 
 const { merge } = require("webpack-merge");
-// @ts-ignore
 const CopyPlugin = require("copy-webpack-plugin");
-// @ts-ignore
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-// @ts-ignore
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
-const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
-const express = require("express");
+const {
+  ensureURLExistsAsync,
+  default: TriggerRouteOnEmitPlugin,
+} = require("webpack-trigger-route-on-emit-plugin");
 
 const {
+  hbsHelpersDir,
   srcDir,
   distDir,
   utilsDir,
@@ -27,7 +27,7 @@ const {
   appsDir,
   configDir,
   apiDir,
-  generatedWebPagesDir,
+  dataDir,
 } = require("./paths");
 const { generateStyleRules, generateScriptRules } = require("./generate-rules");
 
@@ -35,7 +35,6 @@ const isDev = process.env.NODE_ENV === "development";
 const entryFiles = fs.readdirSync(entryDir);
 const entryFileNameToPath = entryFiles.reduce((accum, currentFile) => {
   const fileName = currentFile.split(".")[0];
-  // @ts-ignore
   accum[fileName] = path.join(entryDir, currentFile);
   return accum;
 }, {});
@@ -63,6 +62,7 @@ const commonConfig = {
       "@styling": path.resolve(srcDir, "styling"),
       "@config": configDir,
       "@api": apiDir,
+      "@data": dataDir,
     },
     extensions: [".js", ".jsx", ".json", ".ts", ".tsx"],
   },
@@ -77,17 +77,33 @@ const commonConfig = {
         loader: "handlebars-loader",
         options: {
           precompileOptions: { knownHelpersOnly: false },
-          helpersDirs: path.resolve(
-            __dirname,
-            "node_modules/handlebars-helpers/lib"
-          ),
+          helperDirs: [
+            path.resolve(__dirname, "node_modules/handlebars-helpers/lib"),
+            hbsHelpersDir,
+          ],
         },
       },
+      ...generateStyleRules(true),
     ],
   },
   plugins: [
     new CopyPlugin({
       patterns: [{ from: "src/webpages/**/*.html", to: "[name].html" }],
+    }),
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+      chunkFilename: "[id].css",
+    }),
+    new TriggerRouteOnEmitPlugin({
+      baseURL: "http://localhost:8080",
+      routes: ["/"],
+      initialCheckTrigger: () => {
+        return Promise.all(
+          [8080, 3434].map((port) =>
+            ensureURLExistsAsync(`http://localhost:${port}`)
+          )
+        );
+      },
     }),
   ],
 };
@@ -112,25 +128,27 @@ const devConfig = {
       },
       */
     ],
-    hot: true,
+    hot: false,
   },
   module: {
-    rules: [...generateScriptRules(false), ...generateStyleRules(false)],
+    rules: [...generateScriptRules(false)],
   },
-  plugins: [new ReactRefreshWebpackPlugin()],
+  plugins: [],
 };
 const prodConfig = {
   output: {
     filename: "[name].[contenthash].bundle.js",
   },
   plugins: [
+    /*
     new MiniCssExtractPlugin({
       filename: "[name].css",
       chunkFilename: "[id].css",
     }),
+    */
   ],
   module: {
-    rules: [...generateScriptRules(true), ...generateStyleRules(true)],
+    rules: [...generateScriptRules(true)],
   },
   optimization: {
     minimizer: [new CssMinimizerPlugin()],

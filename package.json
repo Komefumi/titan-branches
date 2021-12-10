@@ -1,16 +1,18 @@
 {
-  "name": "scully-blastique",
+  "name": "humiliating-fate-and-its-reprieve",
   "scripts": {
     "dev-start": "webpack serve -c ./config/webpack.config.js --node-env development",
+    "template-compiler-start": "webpack --watch -c ./config/webpack.config.js --node-env development",
     "build-bundle": "webpack -c ./config/webpack.config.js --node-env production",
     "correct:build-bundle-linkage": "node ./config/correct-prod-asset-linkage.js",
     "clear-dist": "rimraf dist",
     "prod-build": "yarn run clear-dist && yarn run build-bundle && yarn run correct:build-bundle-linkage",
-    "run-server": "ts-node config/server",
-    "serve-generated-webpages": "live-server generated-webpages --port=3434"
+    "dev-backend-server-start": "ts-node config/server",
+    "serve-generated-webpages": "live-server generated-webpages --mount=/dist:./dist --port=3434 --no-browser",
+    "dev-template-mode-start": "concurrently --kill-others \"npm run dev-start\" \"npm run dev-backend-server-start\" \"npm run serve-generated-webpages\""
   },
   "packageManager": "yarn@3.1.1",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "private": true,
   "devDependencies": {
     "@babel/core": "^7.16.0",
@@ -30,6 +32,7 @@
     "babel-loader": "^8.2.3",
     "beautify": "^0.0.8",
     "cheerio": "^1.0.0-rc.10",
+    "concurrently": "^6.4.0",
     "copy-webpack-plugin": "^10.0.0",
     "css-loader": "^6.5.1",
     "css-minimizer-webpack-plugin": "^3.1.4",
@@ -42,6 +45,7 @@
     "live-server": "^1.2.1",
     "mini-css-extract-plugin": "^2.4.5",
     "prettier": "^2.5.0",
+    "puppeteer": "^12.0.1",
     "react-refresh": "^0.11.0",
     "resolve-url-loader": "next",
     "rimraf": "^3.0.2",
@@ -53,16 +57,32 @@
     "webpack": "^5.64.1",
     "webpack-cli": "^4.9.1",
     "webpack-dev-server": "^4.5.0",
-    "webpack-merge": "^5.8.0"
+    "webpack-merge": "^5.8.0",
+    "webpack-trigger-route-on-emit-plugin": "^0.1.2"
   },
   "dependencies": {
-    "@mental-rebuilders/styles-reset-library": "^3.0.0",
+    "@fontsource/princess-sofia": "^4.5.0",
+    "@fontsource/shanti": "^4.5.0",
+    "@mental-rebuilders/styles-reset-library": "^3.1.0",
     "axios": "^0.24.0",
     "core-js": "^3.19.3",
     "koa-bodyparser": "^4.3.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "6",
-    "regenerator-runtime": "^0.13.9"
-  }
+    "regenerator-runtime": "^0.13.9",
+    "reset-css": "^5.0.1"
+  },
+  "description": "Our life is our choice",
+  "main": "\"\"",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Komefumi/humiliating-fate-and-its-reprieve.git"
+  },
+  "author": "Komefumi <komefumi@protonmail.ch>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Komefumi/humiliating-fate-and-its-reprieve/issues"
+  },
+  "homepage": "https://github.com/Komefumi/humiliating-fate-and-its-reprieve#readme"
 }
